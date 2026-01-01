@@ -28,14 +28,15 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white text-primary">
+    <nav  className="sticky top-0 z-50 bg-white text-primary shadow-border">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2">
-            <div className="text-2xl font-serif font-bold tracking-tight">
+            <img src="/logo.png" alt="Real Men Logo" className="w-10 h-10" />
+            {/* <div className="text-2xl font-bold tracking-tight">
               REAL MEN
-            </div>
+            </div> */}
           </a>
 
           {/* Desktop Navigation - Centered */}
