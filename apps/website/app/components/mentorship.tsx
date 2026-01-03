@@ -9,7 +9,8 @@ export function Mentorship() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">The Mentorship Covenant</h2>
-            <p className="text-2xl italic mb-8">"Iron Sharpening Iron"</p>
+            <p className="text-2xl italic">"Iron Sharpening Iron"</p>
+            <p className="text-sm italic mb-8">- Proverbs 27:17 </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">

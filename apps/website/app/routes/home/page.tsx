@@ -8,7 +8,6 @@ import { Ministry } from "~/components/ministry"
 import { Impact } from "~/components/impact"
 import { Vision } from "~/components/vision"
 import { Mentorship } from "~/components/mentorship"
-import { GetInvolved } from "~/components/get-involved"
 import { Footer } from "~/components/footer"
 
 export default function HomePage() {
@@ -21,11 +20,10 @@ export default function HomePage() {
         <Pillars />
         <Mission />
         <Journey />
-        <Ministry />
+        {/* <Ministry /> */}
         <Impact />
         <Vision />
         <Mentorship />
-        <GetInvolved />
       </main>
       <Footer />
     </>

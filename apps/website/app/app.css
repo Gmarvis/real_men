@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Navy Blue, Coffee Brown, White color scheme */
   --background: oklch(0.98 0.005 85);

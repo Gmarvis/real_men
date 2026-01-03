@@ -7,11 +7,14 @@ export function Hero() {
       id="home"
       className="relative min-h-[90vh] flex items-center justify-center bg-white text-primary overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src="/bg-image3.png" 
+          alt="" 
+          className="w-full h-full object-cover"
         />
+        <div className="absolute inset-0 bg-white/70" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -19,12 +22,12 @@ export function Hero() {
           {/* Slogan Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            <span className="text-sm font-medium tracking-wide">God's Way, Every Day</span>
+            <span className="text-sm font-medium tracking-wide">Real men</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-balance">
-            "Take Courage, and Be a Man."
+            "God's Way, Every Day."
           </h1>
 
           {/* Bible Reference */}

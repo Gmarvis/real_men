@@ -49,7 +49,6 @@ export function Impact() {
                 key={stat.label}
                 className="bg-primary-foreground/10 border border-primary-foreground/20 p-8 rounded-lg backdrop-blur-sm"
               >
-                <Icon className="h-10 w-10 text-accent mb-4" />
                 <div className="font-serif text-5xl font-bold mb-2">{stat.value}</div>
                 <div className="text-xl font-semibold mb-3">{stat.label}</div>
                 <p className="text-primary-foreground/80 leading-relaxed">{stat.description}</p>
