@@ -6,7 +6,6 @@ export function Problem() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
-            <AlertTriangle className="h-8 w-8 text-destructive" />
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground">The Breach in our Community</h2>
           </div>
 

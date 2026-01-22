@@ -39,7 +39,7 @@ export function Pillars() {
           {pillars.map((pillar) => {
             const Icon = pillar.icon
             return (
-              <Card key={pillar.title} className="border-2 hover:border-primary transition-colors">
+              <Card key={pillar.title} className="border hover:border-primary transition-colors">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-primary-foreground" />

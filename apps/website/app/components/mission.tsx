@@ -13,32 +13,56 @@ const values = [
 
 export function Mission() {
   return (
-    <section id="about" className="py-20 md:py-32 bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto mb-16">
-          <h2 className="font-serif text-4xl md:text-6xl font-bold mb-8 text-center text-balance">
-            Mission & Conviction
-          </h2>
-
-          <div className="space-y-8">
-            <div>
-              <h3 className="font-serif text-2xl md:text-3xl font-bold mb-4">Our Vision</h3>
-              <p className="text-lg leading-relaxed text-primary-foreground/90">
-                A community where men embrace and live out their biblical calling fearlessly.
-              </p>
+    <>
+      {/* Vision & Mission - Separate Section */}
+      <section id="about" className="py-20 md:py-32 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Image Left */}
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-lg overflow-hidden">
+                <img 
+                  src="/bg-image2.png" 
+                  alt="Real Men Brotherhood" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-primary/10 rounded-lg -z-10 hidden lg:block" />
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-secondary/20 rounded-lg -z-10 hidden lg:block" />
             </div>
 
+            {/* Text Right */}
             <div>
-              <h3 className="font-serif text-2xl md:text-3xl font-bold mb-4">Our Mission</h3>
-              <p className="text-lg leading-relaxed text-primary-foreground/90">
-                To raise a generation of God-fearing young men who are courageous to lead a life of integrity in every
-                sphere of life.
-              </p>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-10 text-balance">
+                Mission & Conviction
+              </h2>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-4">Our Vision</h3>
+                  <p className="text-lg leading-relaxed text-muted-foreground">
+                    A community where men embrace and live out their biblical calling fearlessly.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold mb-4">Our Mission</h3>
+                  <p className="text-lg leading-relaxed text-muted-foreground">
+                    To raise a generation of God-fearing young men who are courageous to lead a life of integrity in every
+                    sphere of life.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="mb-12">
+      {/* Values Section */}
+      <section  className="py-20 md:py-32 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="mb-12">
           <h3 className="font-serif text-3xl md:text-4xl font-bold mb-8 text-center">The Seven Values</h3>
         </div>
 
@@ -51,7 +75,7 @@ export function Mission() {
                 className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm"
               >
                 <CardContent className="p-6">
-                  <Icon className="h-8 w-8 text-accent mb-3" />
+                  <Icon className="h-8 w-8 text-white mb-3" />
                   <h4 className="font-serif text-xl font-bold mb-2 text-primary-foreground">{value.title}</h4>
                   <p className="text-primary-foreground/80 leading-relaxed">{value.description}</p>
                 </CardContent>
@@ -79,5 +103,6 @@ export function Mission() {
         </div>
       </div>
     </section>
+    </>
   )
 }

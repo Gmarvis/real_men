@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Menu, X } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
 const navItems = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#ministry", label: "Ministry" },
-  { href: "#impact", label: "Impact" },
-  { href: "#mentorship", label: "Mentorship" },
+  { href: "/", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#ministry", label: "Ministry" },
+  { href: "/#impact", label: "Impact" },
+  { href: "/#mentorship", label: "Mentorship" },
 ];
 
 function NavLink({ href, label, onClick }: { href: string; label: string; onClick?: () => void }) {
@@ -26,16 +26,29 @@ function NavLink({ href, label, onClick }: { href: string; label: string; onClic
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white text-primary">
+    <nav className={`fixed top-0 left-0 right-0 z-50 text-primary transition-all duration-300 ${
+      isScrolled ? "bg-white shadow-md" : "bg-transparent"
+    }`}>
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2">
-            <div className="text-2xl font-serif font-bold tracking-tight">
+            <img src="/logo.png" alt="Real Men Logo" className="w-10 h-10" />
+            {/* <div className="text-2xl font-bold tracking-tight">
               REAL MEN
-            </div>
+            </div> */}
           </a>
 
           {/* Desktop Navigation - Centered */}
@@ -47,7 +60,9 @@ export function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="ml-4">Get Involved</Button>
+            <a href="/get-involved">
+              <Button className="ml-4">Get Involved</Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -72,9 +87,11 @@ export function Navigation() {
                   onClick={() => setIsOpen(false)}
                 />
               ))}
-              <Button variant="default" className="w-full">
-                Join the Brotherhood
-              </Button>
+              <a href="/get-involved" className="w-full">
+                <Button variant="default" className="w-full">
+                  Get Involved
+                </Button>
+              </a>
             </div>
           </div>
         )}
