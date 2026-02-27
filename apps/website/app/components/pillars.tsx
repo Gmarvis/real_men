@@ -26,10 +26,10 @@ const pillars = [
 
 export function Pillars() {
   return (
-    <section className="py-20 md:py-32">
+    <section id="strategy" className="py-20 md:py-32">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">The Four Pillars of Strategy</h2>
+          <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">Our Strategy</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Our approach to building godly men who lead with integrity
           </p>

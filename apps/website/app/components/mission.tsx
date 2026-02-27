@@ -1,4 +1,3 @@
-import { Card, CardContent } from "~/components/ui/card"
 import { Shield, Heart, Lock, Star, UserCheck, Home, Award } from "lucide-react"
 
 const values = [
@@ -23,7 +22,7 @@ export function Mission() {
               <div className="aspect-[4/3] rounded-lg overflow-hidden">
                 <img 
                   src="/bg-image2.png" 
-                  alt="Real Men Brotherhood" 
+                  alt="Real Men Community" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -59,50 +58,58 @@ export function Mission() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section  className="py-20 md:py-32 bg-primary text-primary-foreground">
+      {/* Values Section - Circular Layout */}
+      <section className="py-20 md:py-32 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="mb-12">
-          <h3 className="font-serif text-3xl md:text-4xl font-bold mb-8 text-center">The Seven Values</h3>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-          {values.map((value) => {
-            const Icon = value.icon
-            return (
-              <Card
-                key={value.title}
-                className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm"
-              >
-                <CardContent className="p-6">
-                  <Icon className="h-8 w-8 text-white mb-3" />
-                  <h4 className="font-serif text-xl font-bold mb-2 text-primary-foreground">{value.title}</h4>
-                  <p className="text-primary-foreground/80 leading-relaxed">{value.description}</p>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-
-        <div className="max-w-4xl mx-auto space-y-6 border-t border-primary-foreground/20 pt-12">
-          <h3 className="font-serif text-2xl md:text-3xl font-bold mb-6 text-center">Guiding Verses</h3>
-
-          <blockquote className="bg-primary-foreground/10 border-l-4 border-accent p-6 md:p-8 rounded-r backdrop-blur-sm">
-            <p className="text-lg md:text-xl mb-3 italic leading-relaxed">
-              "Most men will proclaim each his own goodness, but who can find a faithful man?"
+          <div className="mb-16">
+            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-center">Our Core Values</h3>
+            <p className="text-center text-primary-foreground/70 max-w-2xl mx-auto">
+              The principles that guide us as we grow together in faith
             </p>
-            <cite className="text-sm font-mono text-primary-foreground/70">— Proverbs 20:6</cite>
-          </blockquote>
+          </div>
 
-          <blockquote className="bg-primary-foreground/10 border-l-4 border-accent p-6 md:p-8 rounded-r backdrop-blur-sm">
-            <p className="text-lg md:text-xl mb-3 italic leading-relaxed">
-              "Take courage and be a man. Observe the requirements of the Lord your God and follow all his ways."
-            </p>
-            <cite className="text-sm font-mono text-primary-foreground/70">— 1 Kings 2:2b-3a</cite>
-          </blockquote>
+          {/* Honeycomb/Balanced Layout - 3 rows: 3-4-3 on desktop, stacked on mobile */}
+          <div className="max-w-5xl mx-auto">
+            {/* Row 1: 3 values */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              {values.slice(0, 3).map((value) => {
+                const Icon = value.icon
+                return (
+                  <div
+                    key={value.title}
+                    className="group bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-primary-foreground/15 transition-all duration-300"
+                  >
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary-foreground/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-7 w-7 text-white" />
+                    </div>
+                    <h4 className="font-serif text-lg font-bold mb-2 text-primary-foreground">{value.title}</h4>
+                    <p className="text-primary-foreground/70 text-sm leading-relaxed">{value.description}</p>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Row 2: 4 values (offset for honeycomb effect) */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 md:-mx-8">
+              {values.slice(3, 7).map((value) => {
+                const Icon = value.icon
+                return (
+                  <div
+                    key={value.title}
+                    className="group bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-primary-foreground/15 transition-all duration-300"
+                  >
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary-foreground/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-7 w-7 text-white" />
+                    </div>
+                    <h4 className="font-serif text-lg font-bold mb-2 text-primary-foreground">{value.title}</h4>
+                    <p className="text-primary-foreground/70 text-sm leading-relaxed">{value.description}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   )
 }

@@ -1,24 +1,28 @@
 import { useState, useEffect } from "react";
 
-import { Menu, X } from "lucide-react";
+import { Menu, X, ExternalLink } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
-  { href: "/#ministry", label: "Ministry" },
-  { href: "/#impact", label: "Impact" },
-  { href: "/#mentorship", label: "Mentorship" },
+  { href: "/who-we-are", label: "Who We Are" },
+  { href: "/#resources", label: "Resources" },
+  { href: "/#strategy", label: "Strategy" },
+  { href: "https://realmen.substack.com", label: "Blog", external: true },
+  { href: "/gallery", label: "Gallery" },
 ];
 
-function NavLink({ href, label, onClick }: { href: string; label: string; onClick?: () => void }) {
+function NavLink({ href, label, onClick, external }: { href: string; label: string; onClick?: () => void; external?: boolean }) {
   return (
     <a
       href={href}
       onClick={onClick}
-      className="relative text-sm font-medium text-primary/80 hover:text-primary transition-colors py-1 group"
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className="relative text-sm font-medium text-primary/80 hover:text-primary transition-colors py-1 group inline-flex items-center gap-1"
     >
       {label}
+      {external && <ExternalLink className="w-3 h-3" />}
       <span className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
     </a>
   );
@@ -54,7 +58,7 @@ export function Navigation() {
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => (
-              <NavLink key={item.href} href={item.href} label={item.label} />
+              <NavLink key={item.href} href={item.href} label={item.label} external={item.external} />
             ))}
           </div>
 
@@ -84,6 +88,7 @@ export function Navigation() {
                   key={item.href}
                   href={item.href}
                   label={item.label}
+                  external={item.external}
                   onClick={() => setIsOpen(false)}
                 />
               ))}
