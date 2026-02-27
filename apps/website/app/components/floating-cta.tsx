@@ -56,26 +56,32 @@ export function FloatingCTA() {
                     href={`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group shadow-sm hover:shadow-md"
-                    whileHover={{ y: -3 }}
+                    className="flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
+                    whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <WhatsAppIcon className="w-6 h-6 text-primary" />
                     </div>
-                    <p className="font-semibold text-foreground text-sm">WhatsApp</p>
+                    <div className="text-center">
+                      <p className="font-semibold text-foreground">WhatsApp</p>
+                      <p className="text-xs text-muted-foreground">Message us</p>
+                    </div>
                   </motion.a>
 
                   <motion.a
                     href={`tel:+${PHONE_NUMBER}`}
-                    className="flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group shadow-sm hover:shadow-md"
-                    whileHover={{ y: -3 }}
+                    className="flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
+                    whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <Phone className="w-6 h-6 text-primary" />
                     </div>
-                    <p className="font-semibold text-foreground text-sm">Call Us</p>
+                    <div className="text-center">
+                      <p className="font-semibold text-foreground">Call Us</p>
+                      <p className="text-xs text-muted-foreground">Speak directly</p>
+                    </div>
                   </motion.a>
                 </div>
               </div>

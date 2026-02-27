@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router';
-import { FloatingSocial } from '~/components/floating-social';
+import { FloatingCTA } from '~/components/floating-cta';
 
 export default function Layout() {
   return (
     <>
-      <FloatingSocial />
+      <FloatingCTA />
       <Outlet />
     </>
   );
