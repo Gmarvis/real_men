@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
-import useEmblaCarousel from "embla-carousel-react"
-import Autoplay from "embla-carousel-autoplay"
+import { useCallback, useEffect, useState, useRef } from "react"
 import { Navigation } from "~/components/navigation"
 import { Footer } from "~/components/footer"
 import { Button } from "~/components/ui/button"
@@ -45,41 +43,77 @@ const galleryImages = [
 ]
 
 export default function GalleryPage() {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "center" },
-    [Autoplay({ delay: 4000, stopOnInteraction: true })]
-  )
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
+  const goToSlide = useCallback((index: number) => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
+    setCurrentIndex(index)
+    setTimeout(() => setIsTransitioning(false), 300)
+  }, [isTransitioning])
 
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
+  const handlePrev = useCallback(() => {
+    const newIndex = currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1
+    goToSlide(newIndex)
+  }, [currentIndex, goToSlide])
 
-  const scrollTo = useCallback(
-    (index: number) => {
-      if (emblaApi) emblaApi.scrollTo(index)
-    },
-    [emblaApi]
-  )
+  const handleNext = useCallback(() => {
+    const newIndex = currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1
+    goToSlide(newIndex)
+  }, [currentIndex, goToSlide])
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [emblaApi])
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
 
-  useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on("select", onSelect)
-    return () => {
-      emblaApi.off("select", onSelect)
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current
+    const minSwipeDistance = 50
+    
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        handleNext()
+      } else {
+        handlePrev()
+      }
     }
-  }, [emblaApi, onSelect])
+  }
+
+  // Auto-play
+  useEffect(() => {
+    autoplayRef.current = setInterval(handleNext, 5000)
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current)
+    }
+  }, [handleNext])
+
+  const pauseAutoplay = () => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current)
+  }
+
+  const resumeAutoplay = () => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current)
+    autoplayRef.current = setInterval(handleNext, 5000)
+  }
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") handlePrev()
+      if (e.key === "ArrowRight") handleNext()
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [handlePrev, handleNext])
 
   return (
     <>
@@ -101,37 +135,50 @@ export default function GalleryPage() {
         <section className="py-16 md:py-24 bg-black/95">
           <div className="container mx-auto px-4 lg:px-8">
             {/* Main Carousel */}
-            <div className="relative max-w-5xl mx-auto">
+            <div 
+              className="relative max-w-5xl mx-auto"
+              onMouseEnter={pauseAutoplay}
+              onMouseLeave={resumeAutoplay}
+            >
               {/* Navigation Arrows */}
               <button
-                onClick={scrollPrev}
-                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors border border-white/20"
+                onClick={handlePrev}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 active:scale-95 transition-all border border-white/20"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="w-6 h-6 text-white" />
               </button>
               
               <button
-                onClick={scrollNext}
-                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors border border-white/20"
+                onClick={handleNext}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 active:scale-95 transition-all border border-white/20"
                 aria-label="Next image"
               >
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
 
-              {/* Embla Carousel */}
-              <div className="overflow-hidden rounded-xl" ref={emblaRef}>
-                <div className="flex">
+              {/* Carousel Slides */}
+              <div 
+                className="overflow-hidden rounded-xl"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div 
+                  className="flex transition-transform duration-300 ease-out will-change-transform"
+                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                >
                   {galleryImages.map((image, index) => (
                     <div
                       key={index}
-                      className="flex-[0_0_100%] min-w-0 relative"
+                      className="flex-shrink-0 w-full relative"
                     >
                       <div className="aspect-[16/10] md:aspect-[16/9]">
                         <img
                           src={image.src}
                           alt={image.caption}
                           className="w-full h-full object-cover"
+                          draggable={false}
                         />
                       </div>
                       {/* Caption Overlay */}
@@ -151,11 +198,11 @@ export default function GalleryPage() {
                 {galleryImages.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => scrollTo(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      index === selectedIndex
+                    onClick={() => goToSlide(index)}
+                    className={`h-2.5 rounded-full transition-all duration-200 ${
+                      index === currentIndex
                         ? "bg-white w-8"
-                        : "bg-white/40 hover:bg-white/60"
+                        : "bg-white/40 hover:bg-white/60 w-2.5"
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
@@ -169,9 +216,9 @@ export default function GalleryPage() {
                 {galleryImages.map((image, index) => (
                   <button
                     key={index}
-                    onClick={() => scrollTo(index)}
-                    className={`flex-shrink-0 w-20 h-14 md:w-24 md:h-16 rounded-lg overflow-hidden transition-all duration-300 ${
-                      index === selectedIndex
+                    onClick={() => goToSlide(index)}
+                    className={`flex-shrink-0 w-20 h-14 md:w-24 md:h-16 rounded-lg overflow-hidden transition-all duration-200 ${
+                      index === currentIndex
                         ? "ring-2 ring-white opacity-100"
                         : "opacity-50 hover:opacity-80"
                     }`}
@@ -189,7 +236,7 @@ export default function GalleryPage() {
             {/* Image Counter */}
             <div className="text-center mt-6">
               <span className="text-white/60 text-sm">
-                {selectedIndex + 1} / {galleryImages.length}
+                {currentIndex + 1} / {galleryImages.length}
               </span>
             </div>
           </div>
