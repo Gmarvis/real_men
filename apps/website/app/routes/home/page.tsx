@@ -2,12 +2,8 @@ import { Navigation } from "~/components/navigation"
 import { Hero } from "~/components/hero"
 import { Problem } from "~/components/problem"
 import { Pillars } from "~/components/pillars"
-import { Mission } from "~/components/mission"
-import { Journey } from "~/components/journey"
-import { Ministry } from "~/components/ministry"
-import { Impact } from "~/components/impact"
-import { Vision } from "~/components/vision"
-import { Mentorship } from "~/components/mentorship"
+import { PhotosSection } from "~/components/photos-section"
+import { VideosSection } from "~/components/videos-section"
 import { Footer } from "~/components/footer"
 
 export default function HomePage() {
@@ -18,12 +14,8 @@ export default function HomePage() {
         <Hero />
         <Problem />
         <Pillars />
-        <Mission />
-        <Journey />
-        {/* <Ministry /> */}
-        <Impact />
-        <Vision />
-        <Mentorship />
+        <PhotosSection />
+        <VideosSection />
       </main>
       <Footer />
     </>

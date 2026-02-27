@@ -2,40 +2,7 @@ import { Button } from "~/components/ui/button"
 import { Card, CardContent } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { Textarea } from "~/components/ui/textarea"
-import { BookOpen, Hand, Heart, Mail, MapPin, Phone, Users, Calendar, MessageCircle } from "lucide-react"
-
-const ways = [
-  {
-    icon: BookOpen,
-    title: "Teach",
-    description: "Share your wisdom and biblical knowledge with the brotherhood.",
-  },
-  {
-    icon: Hand,
-    title: "Lead",
-    description: "Guide men into prayer and deeper relationship with God.",
-  },
-  {
-    icon: Heart,
-    title: "Partner",
-    description: "Support the vision through resources and stewardship.",
-  },
-  {
-    icon: Users,
-    title: "Mentor",
-    description: "Walk alongside young men as they grow in faith and character.",
-  },
-  {
-    icon: Calendar,
-    title: "Organize",
-    description: "Help plan and coordinate gatherings, retreats, and events.",
-  },
-  {
-    icon: MessageCircle,
-    title: "Connect",
-    description: "Spread the word and invite men to join the brotherhood.",
-  },
-]
+import { Mail, MapPin, Phone, Users, Heart } from "lucide-react"
 
 export function GetInvolved() {
   return (
@@ -44,52 +11,96 @@ export function GetInvolved() {
       <section className="bg-primary text-primary-foreground py-20 md:py-32">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 mb-8">
-              <span className="text-sm font-medium">Answer the Call</span>
-            </div>
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance">
               Get Involved
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed max-w-2xl mx-auto">
-              Are you called to teach? To lead men into prayer? To partner with us? 
-              The harvest is plentiful—answer the call to stewardship.
+              Join a community of men committed to living out God's purpose. 
+              Whether you want to be part of our gatherings or support the vision, there's a place for you.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Ways to Serve */}
+      {/* Two Options Section */}
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6">Ways to Serve</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Every man has a gift. Find your place in the brotherhood.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {ways.map((way) => {
-              const Icon = way.icon
-              return (
-                <div
-                  key={way.title}
-                  className="group p-8 rounded-lg border-2 border-border hover:border-primary bg-card hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                    <Icon className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
-                  </div>
-                  <h3 className="font-serif text-2xl font-bold mb-3">{way.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{way.description}</p>
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+            {/* Join Us */}
+            <Card className="border-2 hover:border-primary transition-colors">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                  <Users className="h-8 w-8 text-primary" />
                 </div>
-              )
-            })}
+                <h2 className="font-serif text-2xl md:text-3xl font-bold mb-4">Join Us</h2>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Become part of the Real Men community. Attend our monthly gatherings, 
+                  connect with like-minded men, and grow in your faith journey together.
+                </p>
+                <ul className="space-y-3 mb-8 text-sm">
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Monthly gatherings and fellowship
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Biblical teaching and discipleship
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Accountability and mentorship
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Annual retreats and conventions
+                  </li>
+                </ul>
+                <a href="#contact-form">
+                  <Button className="w-full" size="lg">Join the Community</Button>
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Partner With Us */}
+            <Card className="border-2 hover:border-primary transition-colors">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                  <Heart className="h-8 w-8 text-primary" />
+                </div>
+                <h2 className="font-serif text-2xl md:text-3xl font-bold mb-4">Partner With Us</h2>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Support the vision of raising godly men. Partner through donations, 
+                  mentorship, or by sharing your expertise and resources with the community.
+                </p>
+                <ul className="space-y-3 mb-8 text-sm">
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Financial support and donations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Become a mentor to young men
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Share skills and expertise
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    Provide resources and venues
+                  </li>
+                </ul>
+                <a href="#contact-form">
+                  <Button variant="outline" className="w-full" size="lg">Become a Partner</Button>
+                </a>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 md:py-32 bg-muted/30">
+      <section id="contact-form" className="py-20 md:py-32 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -98,7 +109,7 @@ export function GetInvolved() {
                 <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6">Let's Connect</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-10">
                   Ready to take the next step? Reach out to us. Whether you have questions, 
-                  want to join a gathering, or feel called to serve—we'd love to hear from you.
+                  want to join a gathering, or feel called to partner—we'd love to hear from you.
                 </p>
 
                 <div className="space-y-6">
@@ -178,19 +189,17 @@ export function GetInvolved() {
 
                       <div>
                         <label htmlFor="interest" className="block text-sm font-medium mb-2">
-                          How would you like to serve?
+                          I'm interested in...
                         </label>
                         <select 
                           id="interest" 
                           className="w-full h-12 px-3 rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                         >
                           <option value="">Select an option...</option>
-                          <option value="teach">Teach - Share biblical knowledge</option>
-                          <option value="lead">Lead - Guide men in prayer</option>
-                          <option value="partner">Partner - Support with resources</option>
-                          <option value="mentor">Mentor - Walk alongside young men</option>
-                          <option value="organize">Organize - Help with events</option>
-                          <option value="connect">Connect - Spread the word</option>
+                          <option value="join">Joining the community</option>
+                          <option value="donate">Making a donation</option>
+                          <option value="mentor">Becoming a mentor</option>
+                          <option value="partner">Partnering with resources</option>
                           <option value="other">Other</option>
                         </select>
                       </div>
