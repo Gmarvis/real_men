@@ -1,9 +1,9 @@
 import { Instagram, Youtube, Facebook, Twitter } from "lucide-react"
 
 const socialLinks = [
-  { icon: Instagram, href: "https://instagram.com/realmen", label: "Instagram", color: "hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400" },
+  { icon: Instagram, href: "https://www.instagram.com/r.e.a.l_m.e.n?igsh=emc0d2sxOWZlOHM0", label: "Instagram", color: "hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400" },
   { icon: Youtube, href: "https://youtube.com/@realmen", label: "YouTube", color: "hover:bg-red-600" },
-  { icon: Facebook, href: "https://facebook.com/realmen", label: "Facebook", color: "hover:bg-blue-600" },
+  { icon: Facebook, href: "https://www.facebook.com/share/18KVrA9LSn/?mibextid=wwXIfr", label: "Facebook", color: "hover:bg-blue-600" },
   { icon: Twitter, href: "https://twitter.com/realmen", label: "X", color: "hover:bg-black" },
 ]
 

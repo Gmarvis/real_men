@@ -1,9 +1,9 @@
 import { Instagram, Youtube, Facebook, Twitter, Mail } from "lucide-react"
 
 const socialLinks = [
-  { icon: Instagram, href: "https://instagram.com/realmen", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/r.e.a.l_m.e.n?igsh=emc0d2sxOWZlOHM0", label: "Instagram" },
   { icon: Youtube, href: "https://youtube.com/@realmen", label: "YouTube" },
-  { icon: Facebook, href: "https://facebook.com/realmen", label: "Facebook" },
+  { icon: Facebook, href: "https://www.facebook.com/share/18KVrA9LSn/?mibextid=wwXIfr", label: "Facebook" },
   { icon: Twitter, href: "https://twitter.com/realmen", label: "X (Twitter)" },
   { icon: Mail, href: "mailto:contact@realmen.org", label: "Email" },
 ]
