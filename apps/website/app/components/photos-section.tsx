@@ -1,5 +1,7 @@
-import { useState } from "react"
-import { X } from "lucide-react"
+import { useState, useCallback, useEffect } from "react"
+import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
 
 const photos = [
   { src: "/gathering-1/DSC03966.jpg", caption: "Monthly Gathering" },
@@ -8,15 +10,49 @@ const photos = [
   { src: "/gathering-1/DSC04020.jpg", caption: "Building Bonds" },
   { src: "/gathering-1/DSC04025.jpg", caption: "Men of Faith" },
   { src: "/gathering-1/DSC04026.jpg", caption: "Together in Faith" },
+  { src: "/gathering-1/DSC04057.jpg", caption: "Worship & Fellowship" },
+  { src: "/gathering-1/DSC04008.jpg", caption: "Community Spirit" },
 ]
 
 export function PhotosSection() {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: "start",
+      slidesToScroll: 1,
+    },
+    [Autoplay({ delay: 3500, stopOnInteraction: true })]
+  )
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect()
+    emblaApi.on("select", onSelect)
+    return () => {
+      emblaApi.off("select", onSelect)
+    }
+  }, [emblaApi, onSelect])
 
   return (
     <section id="photos" className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">
             Moments Together
           </h2>
@@ -25,26 +61,66 @@ export function PhotosSection() {
           </p>
         </div>
 
-        {/* Photo Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
-          {photos.map((photo, index) => (
-            <div
-              key={index}
-              onClick={() => setSelectedPhoto(index)}
-              className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square bg-muted"
-            >
-              <img
-                src={photo.src}
-                alt={photo.caption}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <p className="text-white text-sm font-medium">{photo.caption}</p>
-              </div>
+        {/* Photo Carousel */}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Navigation Arrows */}
+          <button
+            onClick={scrollPrev}
+            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
+            aria-label="Previous photos"
+          >
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+          </button>
+          
+          <button
+            onClick={scrollNext}
+            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
+            aria-label="Next photos"
+          >
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+          </button>
+
+          {/* Embla Carousel */}
+          <div className="overflow-hidden mx-4 md:mx-8" ref={emblaRef}>
+            <div className="flex gap-4">
+              {photos.map((photo, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectedPhoto(index)}
+                  className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] min-w-0 cursor-pointer group"
+                >
+                  <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-muted">
+                    <img
+                      src={photo.src}
+                      alt={photo.caption}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                      <p className="text-white text-sm font-medium">{photo.caption}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Dot Indicators */}
+          <div className="flex justify-center gap-1.5 mt-6">
+            {photos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => emblaApi?.scrollTo(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === selectedIndex
+                    ? "bg-primary w-6"
+                    : "bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* View More Link */}
