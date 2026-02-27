@@ -71,7 +71,7 @@ export function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-lg bg-white/90 shadow-sm"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -81,7 +81,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-primary/10">
+          <div className="md:hidden py-4 px-4 border-t border-primary/10 bg-white rounded-b-xl shadow-lg">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <NavLink

@@ -31,7 +31,7 @@ export function FloatingCTA() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="absolute bottom-full right-0 mb-4 w-96"
+            className="absolute bottom-full right-0 mb-4 w-64 sm:w-96"
           >
             <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
               {/* Header with primary background */}
@@ -111,7 +111,7 @@ export function FloatingCTA() {
             repeat: isOpen ? 0 : Infinity, 
             repeatDelay: 3 
           }}
-          className="relative z-10"
+          className="relative z-10 translate-x-0.5"
         >
           <Phone className="w-7 h-7 -scale-x-100" />
         </motion.div>
