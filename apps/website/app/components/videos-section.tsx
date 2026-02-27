@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import { Play, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { FadeUp } from "~/components/ui/animated-section"
 
 // Placeholder YouTube Shorts - replace with actual video IDs
 const videos = [
@@ -49,14 +50,14 @@ export function VideosSection() {
   return (
     <section id="videos" className="py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-16">
+        <FadeUp className="text-center mb-16">
           <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">
             Watch & Be Inspired
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Short clips from our journey, testimonies, and moments of impact
           </p>
-        </div>
+        </FadeUp>
 
         {/* YouTube Shorts Slider */}
         <div className="relative max-w-6xl mx-auto px-16 md:px-20">

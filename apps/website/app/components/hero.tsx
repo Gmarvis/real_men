@@ -1,6 +1,7 @@
 import { Button } from "~/components/ui/button"
 import { Play } from "lucide-react"
 import { useState, useEffect } from "react"
+import { motion } from "motion/react"
 
 const guidingVerses = [
   { text: "Take courage and be a man. Observe the requirements of the Lord your God.", ref: "1 Kings 2:2-3" },
@@ -26,10 +27,13 @@ export function Hero() {
     >
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img 
+        <motion.img 
           src="/IMG-20251223-WA0020.jpg" 
           alt="Real Men Gathering" 
           className="w-full h-full object-cover"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         />
         <div className="absolute inset-0 bg-white/70" />
       </div>
@@ -37,18 +41,33 @@ export function Hero() {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Slogan Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 backdrop-blur-sm">
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
             <span className="text-sm font-medium tracking-wide">Real Men</span>
-          </div>
+          </motion.div>
 
           {/* Main Headline */}
-          <h1 className="font-serif text-5xl md:text-79xl lg:text-8xl font-bold mb-6 leading-tight text-balance">
+          <motion.h1 
+            className="font-serif text-5xl md:text-79xl lg:text-8xl font-bold mb-6 leading-tight text-balance"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             The World Needs Godly Men
-          </h1>
+          </motion.h1>
 
           {/* Animated Guiding Verses */}
-          <div className="h-24 md:h-20 mb-6 flex items-center justify-center">
+          <motion.div 
+            className="h-24 md:h-20 mb-6 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             <div className="relative w-full max-w-3xl">
               {guidingVerses.map((verse, index) => (
                 <div
@@ -66,15 +85,25 @@ export function Hero() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Tagline */}
-          <p className="text-xl md:text-2xl font-semibold text-primary mb-12">
+          <motion.p 
+            className="text-xl md:text-2xl font-semibold text-primary mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
             God's Way, Every Day
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
             <a href="/get-involved">
               <Button size="lg" className="text-base px-8 w-full sm:w-auto">
                 Join Us
@@ -90,16 +119,21 @@ export function Hero() {
                 Our Journey
               </Button>
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <motion.div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
+      >
         <div className="w-6 h-10 rounded-full border-2 border-primary/30 flex items-start justify-center p-2">
           <div className="w-1 h-3 bg-primary/50 rounded-full" />
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

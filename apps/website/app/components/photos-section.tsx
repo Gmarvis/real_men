@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { FadeUp } from "~/components/ui/animated-section"
 
 const photos = [
   { src: "/gathering-1/DSC03966.jpg", caption: "Monthly Gathering" },
@@ -83,14 +84,14 @@ export function PhotosSection() {
   return (
     <section id="photos" className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-12">
+        <FadeUp className="text-center mb-12">
           <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">
             Moments Together
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Glimpses from our gatherings, retreats, and fellowship moments
           </p>
-        </div>
+        </FadeUp>
 
         {/* Photo Carousel */}
         <div 

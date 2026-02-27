@@ -64,5 +64,5 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     stack = error.stack;
   }
 
-  return <div>and error occurred</div>;
+  return <div>an error occurred</div>;
 }
