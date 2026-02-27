@@ -31,11 +31,11 @@ export function FloatingCTA() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="absolute bottom-full right-0 mb-4 w-80"
+            className="absolute bottom-full right-0 mb-4 w-96"
           >
             <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
               {/* Header with primary background */}
-              <div className="bg-primary px-6 py-5">
+              <div className="bg-primary px-6 py-4">
                 <h3 className="font-serif text-xl font-bold text-white">
                   Join Our Next Gathering
                 </h3>
@@ -45,8 +45,8 @@ export function FloatingCTA() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <p className="text-muted-foreground text-sm mb-6">
+              <div className="p-5">
+                <p className="text-muted-foreground text-sm mb-4">
                   Be part of a community of men pursuing God's purpose. Reach out to connect with us.
                 </p>
 
@@ -56,32 +56,26 @@ export function FloatingCTA() {
                     href={`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
+                    className="flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
                     whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <WhatsAppIcon className="w-6 h-6 text-primary" />
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <WhatsAppIcon className="w-5 h-5 text-primary" />
                     </div>
-                    <div className="text-center">
-                      <p className="font-semibold text-foreground">WhatsApp</p>
-                      <p className="text-xs text-muted-foreground">Message us</p>
-                    </div>
+                    <p className="font-semibold text-foreground text-sm">WhatsApp</p>
                   </motion.a>
 
                   <motion.a
                     href={`tel:+${PHONE_NUMBER}`}
-                    className="flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
+                    className="flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-all group"
                     whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Phone className="w-6 h-6 text-primary" />
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <Phone className="w-5 h-5 text-primary" />
                     </div>
-                    <div className="text-center">
-                      <p className="font-semibold text-foreground">Call Us</p>
-                      <p className="text-xs text-muted-foreground">Speak directly</p>
-                    </div>
+                    <p className="font-semibold text-foreground text-sm">Call</p>
                   </motion.a>
                 </div>
               </div>
