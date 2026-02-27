@@ -40,17 +40,6 @@ export function Hero() {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Slogan Badge */}
-          <motion.div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 backdrop-blur-sm"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            <span className="text-sm font-medium tracking-wide">Real Men</span>
-          </motion.div>
-
           {/* Main Headline */}
           <motion.h1 
             className="font-serif text-5xl md:text-79xl lg:text-8xl font-bold mb-6 leading-tight text-balance"

@@ -41,12 +41,13 @@ export function Pillars() {
           {pillars.map((pillar) => {
             const Icon = pillar.icon
             return (
-              <StaggerItem key={pillar.title}>
+              <StaggerItem key={pillar.title} className="h-full">
                 <motion.div
+                  className="h-full"
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Card className="border hover:border-primary transition-colors h-full">
+                  <Card className="border-none hover:border-primary transition-colors h-full">
                     <CardContent className="p-6">
                       <motion.div 
                         className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center mb-4"

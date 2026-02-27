@@ -48,11 +48,8 @@ export function Navigation() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Real Men Logo" className="w-10 h-10" />
-            {/* <div className="text-2xl font-bold tracking-tight">
-              REAL MEN
-            </div> */}
+          <a href="/" className="flex items-center gap-2">
+            <img src="/logos/RM_Logo.png" alt="Real Men Logo" className="h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation - Centered */}
