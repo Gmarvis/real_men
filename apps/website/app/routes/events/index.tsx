@@ -1,6 +1,30 @@
 import { useLoaderData } from "react-router"
-import { getAllEvents, formatEventDate, urlFor, type SanityEvent } from "~/lib/sanity"
+import { getAllEvents, formatEventDate, urlFor, getResponsiveImage, type SanityEvent } from "~/lib/sanity"
+import { defaultEventImage } from "~/lib/images"
+import { createMeta, getWebPageSchema } from "~/lib/meta"
 import Page from "./page"
+
+const PAGE_TITLE = 'Events'
+const PAGE_DESCRIPTION = 'Discover upcoming Real Men events, gatherings, and retreats. Join us for fellowship, worship, and spiritual growth opportunities.'
+
+export function meta() {
+  return createMeta({
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: '/events',
+    keywords: 'mens ministry events, christian mens retreat, faith community gatherings, mens fellowship events, bible study meetups',
+  })
+}
+
+export const handle = {
+  structuredData: [
+    getWebPageSchema({
+      title: PAGE_TITLE,
+      description: PAGE_DESCRIPTION,
+      url: '/events',
+    }),
+  ],
+}
 
 export async function loader() {
   const sanityEvents = await getAllEvents()
@@ -9,6 +33,9 @@ export async function loader() {
   const events = sanityEvents.map((event: SanityEvent) => {
     const dateInfo = formatEventDate(event.date)
     const endDateInfo = event.endDate ? formatEventDate(event.endDate) : null
+    const imageData = event.image 
+      ? getResponsiveImage(event.image, [400, 600, 800]) 
+      : defaultEventImage
     
     return {
       id: event._id,
@@ -24,7 +51,8 @@ export async function loader() {
       endTime: endDateInfo?.time,
       venue: event.venue,
       address: event.address,
-      image: event.image ? urlFor(event.image).width(800).url() : '/gathering-1/DSC04057.jpg',
+      image: imageData.src,
+      imageSrcset: imageData.srcset,
       featured: event.featured,
     }
   })

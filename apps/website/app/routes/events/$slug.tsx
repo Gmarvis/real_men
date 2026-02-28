@@ -3,7 +3,9 @@ import { motion } from "motion/react"
 import { MapPin, Clock, Calendar, ArrowLeft, ArrowRight, CheckCircle, Users, CalendarPlus } from "lucide-react"
 import { FadeUp } from "~/components/ui/animated-section"
 import { Button } from "~/components/ui/button"
-import { getEventBySlug as fetchEventBySlug, getGoogleMapsUrl, getDayColor, formatEventDate, urlFor, type SanityEvent } from "~/lib/sanity"
+import { getEventBySlug as fetchEventBySlug, getGoogleMapsUrl, getDayColor, formatEventDate, urlFor, getResponsiveImage, type SanityEvent } from "~/lib/sanity"
+import { defaultEventImage } from "~/lib/images"
+import { createMeta, getEventSchema, getBreadcrumbSchema, SITE_URL } from "~/lib/meta"
 import { Footer } from "~/components/footer"
 
 interface TransformedEvent {
@@ -23,6 +25,7 @@ interface TransformedEvent {
   venue: string
   address: string
   image: string
+  imageSrcset?: string
   featured?: boolean
   highlights?: string[]
   schedule?: { time: string; activity: string }[]
@@ -38,6 +41,9 @@ export async function loader({ params }: LoaderFunctionArgs) {
   
   const dateInfo = formatEventDate(sanityEvent.date)
   const endDateInfo = sanityEvent.endDate ? formatEventDate(sanityEvent.endDate) : null
+  const heroImage = sanityEvent.image 
+    ? getResponsiveImage(sanityEvent.image, [640, 1024, 1440, 1920])
+    : defaultEventImage
   
   const event: TransformedEvent = {
     id: sanityEvent._id,
@@ -59,7 +65,8 @@ export async function loader({ params }: LoaderFunctionArgs) {
     endTime: endDateInfo?.time,
     venue: sanityEvent.venue,
     address: sanityEvent.address,
-    image: sanityEvent.image ? urlFor(sanityEvent.image).width(1200).url() : '/gathering-1/DSC04057.jpg',
+    image: heroImage.src,
+    imageSrcset: heroImage.srcset,
     featured: sanityEvent.featured,
     highlights: sanityEvent.highlights,
     schedule: sanityEvent.schedule,
@@ -71,6 +78,29 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
   
   return { event }
+}
+
+// Dynamic SEO meta based on event data
+export function meta({ data }: { data: { event: TransformedEvent | null } }) {
+  if (!data?.event) {
+    return createMeta({
+      title: 'Event Not Found',
+      description: 'The requested event could not be found.',
+      url: '/events',
+      noIndex: true,
+    })
+  }
+
+  const { event } = data
+  return createMeta({
+    title: event.title,
+    description: event.description,
+    url: `/events/${event.slug}`,
+    image: event.image,
+    type: 'event',
+    publishedTime: event.date,
+    keywords: `${event.title}, mens ministry event, christian event, real men gathering, ${event.venue}`,
+  })
 }
 
 // Generate Google Calendar URL
@@ -187,6 +217,8 @@ export default function EventDetailPage() {
           <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
             <img
               src={event.image}
+              srcSet={event.imageSrcset}
+              sizes="100vw"
               alt={event.title}
               className="w-full h-full object-cover"
             />
@@ -304,6 +336,7 @@ export default function EventDetailPage() {
                                 <img 
                                   src={speaker.image} 
                                   alt={speaker.name}
+                                  loading="lazy"
                                   className="w-16 h-16 rounded-full object-cover mx-auto mb-4"
                                 />
                               ) : (

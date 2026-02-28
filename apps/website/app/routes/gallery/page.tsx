@@ -2,44 +2,13 @@ import { useCallback, useEffect, useState, useRef } from "react"
 import { Footer } from "~/components/footer"
 import { Button } from "~/components/ui/button"
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react"
+import { galleryImages as baseImages } from "~/lib/images"
 
-const galleryImages = [
-  {
-    src: "/gathering-1/DSC03966.jpg",
-    caption: "Real Men Gathering",
-    event: "Monthly Fellowship",
-  },
-  {
-    src: "/gathering-1/DSC04006.jpg",
-    caption: "Fellowship in Action",
-    event: "Community Meeting",
-  },
-  {
-    src: "/gathering-1/DSC04013.jpg",
-    caption: "United in Purpose",
-    event: "Group Session",
-  },
-  {
-    src: "/gathering-1/DSC04020.jpg",
-    caption: "Building Bonds",
-    event: "Fellowship Event",
-  },
-  {
-    src: "/gathering-1/DSC04025.jpg",
-    caption: "Men of Faith",
-    event: "Gathering",
-  },
-  {
-    src: "/gathering-1/DSC04026.jpg",
-    caption: "Together in Faith",
-    event: "Community Event",
-  },
-  {
-    src: "/gathering-1/DSC04057.jpg",
-    caption: "Worship & Fellowship",
-    event: "Monthly Gathering",
-  },
-]
+// Extend with event info for gallery page
+const galleryImages = baseImages.map((img, i) => ({
+  ...img,
+  event: ["Monthly Fellowship", "Community Meeting", "Group Session", "Fellowship Event", "Gathering", "Community Event", "Monthly Gathering"][i]
+}))
 
 export default function GalleryPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -174,6 +143,8 @@ export default function GalleryPage() {
                       <div className="aspect-[16/10] md:aspect-[16/9]">
                         <img
                           src={image.src}
+                          srcSet={image.srcset}
+                          sizes="(max-width: 1280px) 100vw, 1280px"
                           alt={image.caption}
                           className="w-full h-full object-cover"
                           draggable={false}
@@ -225,6 +196,7 @@ export default function GalleryPage() {
                       src={image.src}
                       alt={image.caption}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </button>
                 ))}

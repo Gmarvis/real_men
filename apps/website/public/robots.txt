@@ -1,0 +1,23 @@
+# Real Men Website - robots.txt
+# https://realmen.org
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://realmen.org/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /api/
+Disallow: /_data/
+
+# Allow all crawlers to access public content
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay for less aggressive crawlers
+User-agent: *
+Crawl-delay: 1

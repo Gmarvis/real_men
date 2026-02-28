@@ -14,7 +14,16 @@ export const sanityClient = createClient({
 const builder = imageUrlBuilder(sanityClient)
 
 export function urlFor(source: SanityImageSource) {
-  return builder.image(source)
+  return builder.image(source).auto('format').quality(80)
+}
+
+// Generate responsive image srcset for different screen sizes
+export function getResponsiveImage(source: SanityImageSource, sizes: number[] = [400, 800, 1200, 1600]) {
+  const srcset = sizes
+    .map(width => `${urlFor(source).width(width).url()} ${width}w`)
+    .join(', ')
+  const src = urlFor(source).width(sizes[1] || 800).url() // Default fallback
+  return { src, srcset }
 }
 
 // Type definitions for Sanity event

@@ -1,16 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { FadeUp } from "~/components/ui/animated-section"
-
-const photos = [
-  { src: "/gathering-1/DSC03966.jpg", caption: "Monthly Gathering" },
-  { src: "/gathering-1/DSC04006.jpg", caption: "Fellowship in Action" },
-  { src: "/gathering-1/DSC04013.jpg", caption: "United in Purpose" },
-  { src: "/gathering-1/DSC04020.jpg", caption: "Building Bonds" },
-  { src: "/gathering-1/DSC04025.jpg", caption: "Men of Faith" },
-  { src: "/gathering-1/DSC04026.jpg", caption: "Together in Faith" },
-  { src: "/gathering-1/DSC04057.jpg", caption: "Worship & Fellowship" },
-]
+import { galleryImages as photos } from "~/lib/images"
 
 export function PhotosSection() {
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
@@ -132,6 +123,8 @@ export function PhotosSection() {
                 <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-muted">
                   <img
                     src={photo.src}
+                    srcSet={photo.srcset}
+                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 45vw, 30vw"
                     alt={photo.caption}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
                     loading="lazy"
@@ -191,6 +184,8 @@ export function PhotosSection() {
           </button>
           <img
             src={photos[selectedPhoto].src}
+            srcSet={photos[selectedPhoto].srcset}
+            sizes="100vw"
             alt={photos[selectedPhoto].caption}
             className="max-w-full max-h-[90vh] object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}

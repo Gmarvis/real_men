@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import { Menu, X, ExternalLink } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { logo } from "~/lib/images";
 
 const navItems: { href: string; label: string; external?: boolean }[] = [
   { href: "/", label: "Home" },
@@ -65,7 +66,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2">
-            <img src="/logos/RM_Logo.png" alt="Real Men Logo" className="h-12 w-auto" />
+            <img src={logo.src} alt="Real Men Logo" className="h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation - Centered */}
