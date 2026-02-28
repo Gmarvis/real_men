@@ -6,5 +6,7 @@ export default [
     route('get-involved', './routes/get-involved/index.tsx'),
     route('who-we-are', './routes/who-we-are/index.tsx'),
     route('gallery', './routes/gallery/index.tsx'),
+    route('events', './routes/events/index.tsx'),
+    route('events/:slug', './routes/events/$slug.tsx'),
   ]),
 ] satisfies RouteConfig;

@@ -1,4 +1,3 @@
-import { Navigation } from "~/components/navigation"
 import { Footer } from "~/components/footer"
 import { Mission } from "~/components/mission"
 import { Journey } from "~/components/journey"
@@ -8,7 +7,6 @@ import { ArrowLeft } from "lucide-react"
 export default function WhoWeArePage() {
   return (
     <>
-      <Navigation />
       <main className="min-h-screen pt-16">
         {/* Page Header */}
         <section className="py-16 md:py-24 bg-primary text-primary-foreground">

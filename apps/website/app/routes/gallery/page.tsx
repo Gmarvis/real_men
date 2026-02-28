@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState, useRef } from "react"
-import { Navigation } from "~/components/navigation"
 import { Footer } from "~/components/footer"
 import { Button } from "~/components/ui/button"
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react"
@@ -117,7 +116,6 @@ export default function GalleryPage() {
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen pt-16">
         {/* Page Header */}
         <section className="py-16 md:py-24 bg-primary text-primary-foreground">

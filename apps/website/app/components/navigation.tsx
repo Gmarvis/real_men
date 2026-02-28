@@ -1,29 +1,33 @@
 import { useState, useEffect } from "react";
-
+import { useLocation } from "react-router";
 import { Menu, X, ExternalLink } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
-const navItems = [
+const navItems: { href: string; label: string; external?: boolean }[] = [
   { href: "/", label: "Home" },
   { href: "/who-we-are", label: "Who We Are" },
   { href: "/#resources", label: "Resources" },
   { href: "/#strategy", label: "Strategy" },
-  { href: "https://realmen.substack.com", label: "Blog", external: true },
   { href: "/gallery", label: "Gallery" },
+  { href: "/events", label: "Events" },
 ];
 
-function NavLink({ href, label, onClick, external }: { href: string; label: string; onClick?: () => void; external?: boolean }) {
+function NavLink({ href, label, onClick, external, isActive }: { href: string; label: string; onClick?: () => void; external?: boolean; isActive?: boolean }) {
   return (
     <a
       href={href}
       onClick={onClick}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="relative text-sm font-medium text-primary/80 hover:text-primary transition-colors py-1 group inline-flex items-center gap-1"
+      className={`relative text-sm font-medium transition-colors py-1 group inline-flex items-center gap-1 ${
+        isActive ? "text-primary" : "text-primary/80 hover:text-primary"
+      }`}
     >
       {label}
       {external && <ExternalLink className="w-3 h-3" />}
-      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-secondary transition-transform duration-300 origin-left ${
+        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+      }`} />
     </a>
   );
 }
@@ -31,6 +35,18 @@ function NavLink({ href, label, onClick, external }: { href: string; label: stri
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  // Check if a nav item is active
+  const isActiveLink = (href: string) => {
+    if (href === "/") {
+      return location.pathname === "/";
+    }
+    if (href.startsWith("/#")) {
+      return location.pathname === "/" && location.hash === href.slice(1);
+    }
+    return location.pathname.startsWith(href);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +71,7 @@ export function Navigation() {
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => (
-              <NavLink key={item.href} href={item.href} label={item.label} external={item.external} />
+              <NavLink key={item.href} href={item.href} label={item.label} external={item.external} isActive={isActiveLink(item.href)} />
             ))}
           </div>
 
@@ -86,6 +102,7 @@ export function Navigation() {
                   href={item.href}
                   label={item.label}
                   external={item.external}
+                  isActive={isActiveLink(item.href)}
                   onClick={() => setIsOpen(false)}
                 />
               ))}

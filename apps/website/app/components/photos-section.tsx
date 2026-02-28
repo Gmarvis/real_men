@@ -10,7 +10,6 @@ const photos = [
   { src: "/gathering-1/DSC04025.jpg", caption: "Men of Faith" },
   { src: "/gathering-1/DSC04026.jpg", caption: "Together in Faith" },
   { src: "/gathering-1/DSC04057.jpg", caption: "Worship & Fellowship" },
-  { src: "/gathering-1/DSC04008.jpg", caption: "Community Spirit" },
 ]
 
 export function PhotosSection() {

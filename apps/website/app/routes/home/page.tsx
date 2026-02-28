@@ -1,4 +1,3 @@
-import { Navigation } from "~/components/navigation"
 import { Hero } from "~/components/hero"
 import { Problem } from "~/components/problem"
 import { Pillars } from "~/components/pillars"
@@ -9,7 +8,6 @@ import { Footer } from "~/components/footer"
 export default function HomePage() {
   return (
     <>
-      <Navigation />
       <main className="min-h-screen">
         <Hero />
         <Problem />

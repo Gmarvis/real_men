@@ -1,10 +1,9 @@
-import { Instagram, Youtube, Facebook, Twitter } from "lucide-react"
+import { Instagram, Youtube, Facebook } from "lucide-react"
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/r.e.a.l_m.e.n?igsh=emc0d2sxOWZlOHM0", label: "Instagram", color: "hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400" },
-  { icon: Youtube, href: "https://youtube.com/@realmen", label: "YouTube", color: "hover:bg-red-600" },
+  { icon: Youtube, href: "https://www.youtube.com/@real-men-org", label: "YouTube", color: "hover:bg-red-600" },
   { icon: Facebook, href: "https://www.facebook.com/share/18KVrA9LSn/?mibextid=wwXIfr", label: "Facebook", color: "hover:bg-blue-600" },
-  { icon: Twitter, href: "https://twitter.com/realmen", label: "X", color: "hover:bg-black" },
 ]
 
 export function FloatingSocial() {

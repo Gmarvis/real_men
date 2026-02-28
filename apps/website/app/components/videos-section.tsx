@@ -2,37 +2,19 @@ import { useState, useRef } from "react"
 import { Play, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { FadeUp } from "~/components/ui/animated-section"
 
-// Placeholder YouTube Shorts - replace with actual video IDs
+// Real Men YouTube Shorts
 const videos = [
   {
-    id: "jNQXAC9IVRw", // Sample video placeholder
-    title: "What It Means to Be a Real Man",
-    thumbnail: "/gathering-1/DSC04057.jpg",
+    id: "q9MEjHU6AcQ",
+    title: "Brotherly gathering with a shared love for Christ",
   },
   {
-    id: "9bZkp7q19f0", // Sample video placeholder
-    title: "Monthly Gathering Highlights",
-    thumbnail: "/gathering-1/DSC04020.jpg",
+    id: "_92R4OgxbX4",
+    title: "A group of guys growing in faith and life together",
   },
   {
-    id: "kJQP7kiw5Fk", // Sample video placeholder
-    title: "Testimonies of Transformation",
-    thumbnail: "/gathering-1/DSC04013.jpg",
-  },
-  {
-    id: "JGwWNGJdvx8", // Sample video placeholder
-    title: "Fellowship Moments",
-    thumbnail: "/gathering-1/DSC04006.jpg",
-  },
-  {
-    id: "dQw4w9WgXcQ", // Sample video placeholder
-    title: "Brotherhood in Action",
-    thumbnail: "/gathering-1/DSC04008.jpg",
-  },
-  {
-    id: "L_jWHffIx5E", // Sample video placeholder
-    title: "Faith & Community",
-    thumbnail: "/gathering-1/DSC04023.jpg",
+    id: "nvCtSQ4Qnq8",
+    title: "Real Men Community",
   },
 ]
 
@@ -90,9 +72,9 @@ export function VideosSection() {
                 onClick={() => setActiveVideo(index)}
                 className="group relative flex-shrink-0 w-[200px] md:w-[260px] overflow-hidden rounded-xl bg-muted aspect-[9/16] cursor-pointer snap-center"
               >
-                {/* Thumbnail */}
+                {/* Thumbnail - YouTube auto-generated */}
                 <img
-                  src={video.thumbnail}
+                  src={`https://img.youtube.com/vi/${video.id}/0.jpg`}
                   alt={video.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"

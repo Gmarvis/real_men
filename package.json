@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "pnpm --filter website dev",
+    "dev:cms": "pnpm --filter @real-men/cms dev",
     "build": "pnpm --filter website build",
+    "build:cms": "pnpm --filter @real-men/cms build",
+    "deploy:cms": "pnpm --filter @real-men/cms deploy",
     "start": "pnpm --filter website start",
     "lint": "pnpm --filter website lint"
   },
