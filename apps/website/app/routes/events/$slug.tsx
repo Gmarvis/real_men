@@ -1,6 +1,7 @@
 import { useLoaderData, Link, type LoaderFunctionArgs } from "react-router"
+import { useState, useEffect, useRef } from "react"
 import { motion } from "motion/react"
-import { MapPin, Clock, Calendar, ArrowLeft, ArrowRight, CheckCircle, Users, CalendarPlus } from "lucide-react"
+import { MapPin, Clock, Calendar, ArrowLeft, ArrowRight, CheckCircle, Users, CalendarPlus, ChevronDown } from "lucide-react"
 import { FadeUp } from "~/components/ui/animated-section"
 import { Button } from "~/components/ui/button"
 import { getEventBySlug as fetchEventBySlug, getGoogleMapsUrl, getDayColor, formatEventDate, urlFor, getResponsiveImage, type SanityEvent } from "~/lib/sanity"
@@ -179,6 +180,24 @@ function downloadICS(event: Parameters<typeof generateICS>[0]) {
 
 export default function EventDetailPage() {
   const { event } = useLoaderData<typeof loader>()
+  const [isCalendarDropdownOpen, setIsCalendarDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsCalendarDropdownOpen(false)
+      }
+    }
+
+    if (isCalendarDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }
+  }, [isCalendarDropdownOpen])
 
   if (!event) {
     return (
@@ -425,27 +444,39 @@ export default function EventDetailPage() {
                           </a>
                           
                           {/* Add to Calendar Dropdown */}
-                          <div className="relative group">
-                            <Button variant="outline" className="w-full" size="lg">
+                          <div className="relative" ref={dropdownRef}>
+                            <Button 
+                              variant="outline" 
+                              className="w-full" 
+                              size="lg"
+                              onClick={() => setIsCalendarDropdownOpen(!isCalendarDropdownOpen)}
+                            >
                               <CalendarPlus className="w-4 h-4 mr-2" />
                               Add to Calendar
+                              <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${isCalendarDropdownOpen ? 'rotate-180' : ''}`} />
                             </Button>
-                            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                              <a
-                                href={getGoogleCalendarUrl(event)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block px-4 py-3 text-sm text-foreground hover:bg-gray-50 rounded-t-lg"
-                              >
-                                Google Calendar
-                              </a>
-                              <button
-                                onClick={() => downloadICS(event)}
-                                className="block w-full text-left px-4 py-3 text-sm text-foreground hover:bg-gray-50 rounded-b-lg"
-                              >
-                                Apple Calendar / Outlook (.ics)
-                              </button>
-                            </div>
+                            {isCalendarDropdownOpen && (
+                              <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                <a
+                                  href={getGoogleCalendarUrl(event)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block px-4 py-3 text-sm text-foreground hover:bg-gray-50 rounded-t-lg"
+                                  onClick={() => setIsCalendarDropdownOpen(false)}
+                                >
+                                  Google Calendar
+                                </a>
+                                <button
+                                  onClick={() => {
+                                    downloadICS(event)
+                                    setIsCalendarDropdownOpen(false)
+                                  }}
+                                  className="block w-full text-left px-4 py-3 text-sm text-foreground hover:bg-gray-50 rounded-b-lg"
+                                >
+                                  Apple Calendar / Outlook (.ics)
+                                </button>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
