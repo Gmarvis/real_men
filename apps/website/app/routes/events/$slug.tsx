@@ -450,19 +450,26 @@ export default function EventDetailPage() {
                               className="w-full" 
                               size="lg"
                               onClick={() => setIsCalendarDropdownOpen(!isCalendarDropdownOpen)}
+                              aria-expanded={isCalendarDropdownOpen}
+                              aria-haspopup="menu"
                             >
                               <CalendarPlus className="w-4 h-4 mr-2" />
                               Add to Calendar
-                              <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${isCalendarDropdownOpen ? 'rotate-180' : ''}`} />
+                              <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${isCalendarDropdownOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
                             </Button>
                             {isCalendarDropdownOpen && (
-                              <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                              <div 
+                                className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                                role="menu"
+                                aria-label="Calendar options"
+                              >
                                 <a
                                   href={getGoogleCalendarUrl(event)}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="block px-4 py-3 text-sm text-foreground hover:bg-gray-50 rounded-t-lg"
                                   onClick={() => setIsCalendarDropdownOpen(false)}
+                                  role="menuitem"
                                 >
                                   Google Calendar
                                 </a>
@@ -472,6 +479,7 @@ export default function EventDetailPage() {
                                     setIsCalendarDropdownOpen(false)
                                   }}
                                   className="block w-full text-left px-4 py-3 text-sm text-foreground hover:bg-gray-50 rounded-b-lg"
+                                  role="menuitem"
                                 >
                                   Apple Calendar / Outlook (.ics)
                                 </button>
