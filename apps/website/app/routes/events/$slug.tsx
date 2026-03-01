@@ -359,7 +359,7 @@ export default function EventDetailPage() {
                   <div className="sticky top-24 space-y-6 w-full">
                     {/* Event Info Card */}
                     <FadeUp>
-                      <div className="p-6 rounded-2xl bg-white shadow-lg border border-gray-100 overflow-hidden w-full">
+                      <div className="p-6 rounded-2xl bg-white shadow-lg border border-gray-100 w-full">
                         <h3 className="font-serif text-xl font-bold text-primary mb-6">Event Details</h3>
                         
                         <div className="space-y-4 w-full">
@@ -430,7 +430,7 @@ export default function EventDetailPage() {
                               <CalendarPlus className="w-4 h-4 mr-2" />
                               Add to Calendar
                             </Button>
-                            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+                            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                               <a
                                 href={getGoogleCalendarUrl(event)}
                                 target="_blank"
